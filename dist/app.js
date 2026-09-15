@@ -8,6 +8,190 @@
   const clientKey = "moonshot_spotify_client_id";
   const verifierKey = "moonshot_spotify_verifier";
   const stateKey = "moonshot_spotify_state";
+  const languageKey = "moonshot_language";
+
+  const translations = {
+    nl: {
+      pageTitle: "Moonshot Hitster",
+      pageDescription: "Scan de Moonshot-muziekkaarten en speel ze direct af in je browser.",
+      loading: "Missie wordt klaargezet…",
+      setupEyebrow: "Eenmalige voorbereiding",
+      setupTitle: "Koppel Spotify",
+      setupLead: "Daarna spelen alle nummers binnen deze scanner. Je hoeft tijdens het spel niet meer naar Spotify te wisselen.",
+      stepCreate: "Maak een app aan in het Spotify Developer Dashboard.",
+      stepRedirect: "Voeg onderstaande terugkeerlink toe bij Redirect URIs.",
+      stepClient: "Plak de Client ID en verbind je Premium-account.",
+      redirectLabel: "Terugkeerlink",
+      copy: "Kopieer",
+      copied: "Gekopieerd",
+      copyAria: "Kopieer terugkeerlink",
+      clientPlaceholder: "Plak hier de Client ID",
+      connect: "Verbind met Spotify",
+      openDashboard: "Open Spotify Developer Dashboard",
+      readyEyebrow: "95 nummers klaar",
+      readyTitle: "Klaar voor de lancering?",
+      readyLead: "Tik eenmaal op start. Daarna scan je alle kaarten vanuit dit scherm.",
+      startGame: "Start het spel",
+      connecting: "Speler verbinden…",
+      changeConnection: "Spotify-koppeling wijzigen",
+      nextCardEyebrow: "Volgende kaart",
+      scanTitle: "Scan de QR-code",
+      closeScannerAria: "Scanner sluiten",
+      scanHelp: "Houd de kaart stil binnen het kader.",
+      playingEyebrow: "Nummer speelt",
+      playingTitle: "Luister. Weet jij wanneer?",
+      restartAria: "Nummer opnieuw starten",
+      pauseAria: "Pauzeren",
+      playAria: "Afspelen",
+      reveal: "Onthul het antwoord",
+      stopAndScan: "Stop en scan een andere kaart",
+      answerEyebrow: "Het antwoord",
+      scanNext: "Scan volgende kaart",
+      replay: "Nummer opnieuw afspelen",
+      invalidClient: "Controleer de Client ID en probeer opnieuw.",
+      loginVerify: "De Spotify-aanmelding kon niet worden gecontroleerd. Start de koppeling opnieuw.",
+      loginFailed: "Spotify kon de aanmelding niet afronden.",
+      loginAgain: "Meld opnieuw aan bij Spotify.",
+      sessionExpired: "De Spotify-sessie is verlopen. Meld opnieuw aan.",
+      loginFirst: "Meld eerst aan bij Spotify.",
+      sdkFailed: "De Spotify-speler kon niet worden geladen.",
+      premiumRequired: "Voor volledige nummers is Spotify Premium nodig.",
+      reconnect: "De Spotify-sessie is verlopen. Koppel opnieuw.",
+      playbackFailed: "Dit nummer kon niet worden afgespeeld.",
+      apiError: "Spotify-fout",
+      playerNotReady: "De Spotify-speler is nog niet klaar. Probeer opnieuw.",
+      unknownTrack: "Onbekend nummer",
+      unknownArtist: "Onbekende artiest",
+      trackStartFailed: "Het nummer startte niet. Tik op afspelen of controleer je Premium-account.",
+      scannerLoadFailed: "De QR-scanner kon niet worden geladen. Controleer de internetverbinding.",
+      invalidQr: "Dit is geen geldige Spotify-nummercode.",
+      cameraPermission: "Geef de browser toegang tot de camera en probeer opnieuw.",
+      playerStartFailed: "De Spotify-speler kon niet starten.",
+      incompleteTracks: "De nummerlijst is niet compleet.",
+      loginCancelled: "Spotify-aanmelding geannuleerd.",
+      scannerPrepareFailed: "De scanner kon niet worden voorbereid."
+    },
+    fr: {
+      pageTitle: "Moonshot Hitster",
+      pageDescription: "Scannez les cartes musicales Moonshot et écoutez-les directement dans votre navigateur.",
+      loading: "Préparation de la mission…",
+      setupEyebrow: "Configuration unique",
+      setupTitle: "Connecter Spotify",
+      setupLead: "Ensuite, tous les morceaux seront lus dans ce scanner. Vous ne devrez plus passer à Spotify pendant le jeu.",
+      stepCreate: "Créez une application dans le Spotify Developer Dashboard.",
+      stepRedirect: "Ajoutez le lien de retour ci-dessous dans Redirect URIs.",
+      stepClient: "Collez le Client ID et connectez votre compte Premium.",
+      redirectLabel: "Lien de retour",
+      copy: "Copier",
+      copied: "Copié",
+      copyAria: "Copier le lien de retour",
+      clientPlaceholder: "Collez le Client ID ici",
+      connect: "Se connecter à Spotify",
+      openDashboard: "Ouvrir Spotify Developer Dashboard",
+      readyEyebrow: "95 morceaux prêts",
+      readyTitle: "Prêt pour le lancement ?",
+      readyLead: "Appuyez une fois sur démarrer. Scannez ensuite toutes les cartes depuis cet écran.",
+      startGame: "Démarrer le jeu",
+      connecting: "Connexion du lecteur…",
+      changeConnection: "Modifier la connexion Spotify",
+      nextCardEyebrow: "Carte suivante",
+      scanTitle: "Scanner le code QR",
+      closeScannerAria: "Fermer le scanner",
+      scanHelp: "Maintenez la carte immobile dans le cadre.",
+      playingEyebrow: "Lecture en cours",
+      playingTitle: "Écoutez. Savez-vous quand ?",
+      restartAria: "Recommencer le morceau",
+      pauseAria: "Pause",
+      playAria: "Lecture",
+      reveal: "Révéler la réponse",
+      stopAndScan: "Arrêter et scanner une autre carte",
+      answerEyebrow: "La réponse",
+      scanNext: "Scanner la carte suivante",
+      replay: "Réécouter le morceau",
+      invalidClient: "Vérifiez le Client ID et réessayez.",
+      loginVerify: "La connexion Spotify n'a pas pu être vérifiée. Recommencez la connexion.",
+      loginFailed: "Spotify n'a pas pu terminer la connexion.",
+      loginAgain: "Reconnectez-vous à Spotify.",
+      sessionExpired: "La session Spotify a expiré. Reconnectez-vous.",
+      loginFirst: "Connectez-vous d'abord à Spotify.",
+      sdkFailed: "Le lecteur Spotify n'a pas pu être chargé.",
+      premiumRequired: "Spotify Premium est requis pour écouter les morceaux complets.",
+      reconnect: "La session Spotify a expiré. Reconnectez le compte.",
+      playbackFailed: "Ce morceau n'a pas pu être lu.",
+      apiError: "Erreur Spotify",
+      playerNotReady: "Le lecteur Spotify n'est pas encore prêt. Réessayez.",
+      unknownTrack: "Morceau inconnu",
+      unknownArtist: "Artiste inconnu",
+      trackStartFailed: "Le morceau n'a pas démarré. Appuyez sur lecture ou vérifiez votre compte Premium.",
+      scannerLoadFailed: "Le scanner QR n'a pas pu être chargé. Vérifiez la connexion internet.",
+      invalidQr: "Ce code n'est pas un code de morceau Spotify valide.",
+      cameraPermission: "Autorisez l'accès à la caméra dans le navigateur et réessayez.",
+      playerStartFailed: "Le lecteur Spotify n'a pas pu démarrer.",
+      incompleteTracks: "La liste des morceaux est incomplète.",
+      loginCancelled: "Connexion Spotify annulée.",
+      scannerPrepareFailed: "Le scanner n'a pas pu être préparé."
+    },
+    en: {
+      pageTitle: "Moonshot Hitster",
+      pageDescription: "Scan the Moonshot music cards and play them directly in your browser.",
+      loading: "Preparing the mission…",
+      setupEyebrow: "One-time setup",
+      setupTitle: "Connect Spotify",
+      setupLead: "Afterwards, every track plays inside this scanner. You will not need to switch to Spotify during the game.",
+      stepCreate: "Create an app in the Spotify Developer Dashboard.",
+      stepRedirect: "Add the return link below under Redirect URIs.",
+      stepClient: "Paste the Client ID and connect your Premium account.",
+      redirectLabel: "Return link",
+      copy: "Copy",
+      copied: "Copied",
+      copyAria: "Copy return link",
+      clientPlaceholder: "Paste the Client ID here",
+      connect: "Connect to Spotify",
+      openDashboard: "Open Spotify Developer Dashboard",
+      readyEyebrow: "95 tracks ready",
+      readyTitle: "Ready for launch?",
+      readyLead: "Tap start once. You can then scan every card from this screen.",
+      startGame: "Start the game",
+      connecting: "Connecting player…",
+      changeConnection: "Change Spotify connection",
+      nextCardEyebrow: "Next card",
+      scanTitle: "Scan the QR code",
+      closeScannerAria: "Close scanner",
+      scanHelp: "Hold the card steady inside the frame.",
+      playingEyebrow: "Track playing",
+      playingTitle: "Listen. Do you know when?",
+      restartAria: "Restart track",
+      pauseAria: "Pause",
+      playAria: "Play",
+      reveal: "Reveal the answer",
+      stopAndScan: "Stop and scan another card",
+      answerEyebrow: "The answer",
+      scanNext: "Scan next card",
+      replay: "Play the track again",
+      invalidClient: "Check the Client ID and try again.",
+      loginVerify: "The Spotify sign-in could not be verified. Start the connection again.",
+      loginFailed: "Spotify could not complete the sign-in.",
+      loginAgain: "Sign in to Spotify again.",
+      sessionExpired: "The Spotify session has expired. Sign in again.",
+      loginFirst: "Sign in to Spotify first.",
+      sdkFailed: "The Spotify player could not be loaded.",
+      premiumRequired: "Spotify Premium is required for full tracks.",
+      reconnect: "The Spotify session has expired. Reconnect the account.",
+      playbackFailed: "This track could not be played.",
+      apiError: "Spotify error",
+      playerNotReady: "The Spotify player is not ready yet. Try again.",
+      unknownTrack: "Unknown track",
+      unknownArtist: "Unknown artist",
+      trackStartFailed: "The track did not start. Tap play or check your Premium account.",
+      scannerLoadFailed: "The QR scanner could not be loaded. Check the internet connection.",
+      invalidQr: "This is not a valid Spotify track code.",
+      cameraPermission: "Allow camera access in the browser and try again.",
+      playerStartFailed: "The Spotify player could not start.",
+      incompleteTracks: "The track list is incomplete.",
+      loginCancelled: "Spotify sign-in cancelled.",
+      scannerPrepareFailed: "The scanner could not be prepared."
+    }
+  };
 
   let tracks = [];
   let tracksById = new Map();
@@ -17,6 +201,32 @@
   let scanner = null;
   let currentTrack = null;
   let isPlaying = true;
+  let language = localStorage.getItem(languageKey) || "nl";
+
+  function t(key) {
+    return translations[language]?.[key] || translations.nl[key] || key;
+  }
+
+  function applyLanguage(nextLanguage) {
+    language = translations[nextLanguage] ? nextLanguage : "nl";
+    localStorage.setItem(languageKey, language);
+    document.documentElement.lang = language;
+    document.title = t("pageTitle");
+    document.querySelector('meta[name="description"]').setAttribute("content", t("pageDescription"));
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+      element.textContent = t(element.dataset.i18n);
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+      element.setAttribute("placeholder", t(element.dataset.i18nPlaceholder));
+    });
+    document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+      element.setAttribute("aria-label", t(element.dataset.i18nAria));
+    });
+    document.querySelectorAll("[data-language]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.language === language));
+    });
+    $("togglePlayback").setAttribute("aria-label", isPlaying ? t("pauseAria") : t("playAria"));
+  }
 
   function showView(id) {
     views.forEach((viewId) => $(viewId).classList.toggle("hidden", viewId !== id));
@@ -67,7 +277,7 @@
   async function connectSpotify() {
     const clientId = $("clientId").value.trim();
     if (!/^[a-zA-Z0-9]{20,64}$/.test(clientId)) {
-      showError("setupError", "Controleer de Client ID en probeer opnieuw.");
+      showError("setupError", t("invalidClient"));
       return;
     }
 
@@ -96,7 +306,7 @@
     const expectedState = sessionStorage.getItem(stateKey);
     const params = new URLSearchParams(location.search);
     if (!clientId || !verifier || params.get("state") !== expectedState) {
-      throw new Error("De Spotify-aanmelding kon niet worden gecontroleerd. Start de koppeling opnieuw.");
+      throw new Error(t("loginVerify"));
     }
 
     const response = await fetch("https://accounts.spotify.com/api/token", {
@@ -110,7 +320,7 @@
         code_verifier: verifier
       })
     });
-    if (!response.ok) throw new Error("Spotify kon de aanmelding niet afronden.");
+    if (!response.ok) throw new Error(t("loginFailed"));
     const result = await response.json();
     saveTokens({
       access_token: result.access_token,
@@ -123,7 +333,7 @@
   }
 
   async function refreshAccessToken() {
-    if (!tokens?.refresh_token) throw new Error("Meld opnieuw aan bij Spotify.");
+    if (!tokens?.refresh_token) throw new Error(t("loginAgain"));
     const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -133,7 +343,7 @@
         refresh_token: tokens.refresh_token
       })
     });
-    if (!response.ok) throw new Error("De Spotify-sessie is verlopen. Meld opnieuw aan.");
+    if (!response.ok) throw new Error(t("sessionExpired"));
     const result = await response.json();
     saveTokens({
       access_token: result.access_token,
@@ -144,7 +354,7 @@
   }
 
   async function accessToken() {
-    if (!tokens) throw new Error("Meld eerst aan bij Spotify.");
+    if (!tokens) throw new Error(t("loginFirst"));
     if (Date.now() >= tokens.expires_at) return refreshAccessToken();
     return tokens.access_token;
   }
@@ -152,7 +362,7 @@
   function waitForSpotifySdk() {
     return new Promise((resolve, reject) => {
       if (window.Spotify) return resolve();
-      const timeout = setTimeout(() => reject(new Error("De Spotify-speler kon niet worden geladen.")), 12000);
+      const timeout = setTimeout(() => reject(new Error(t("sdkFailed"))), 12000);
       window.onSpotifyWebPlaybackSDKReady = () => {
         clearTimeout(timeout);
         resolve();
@@ -172,14 +382,14 @@
 
     player.addListener("ready", ({ device_id }) => { deviceId = device_id; });
     player.addListener("not_ready", () => { deviceId = null; });
-    player.addListener("account_error", () => showError("playError", "Voor volledige nummers is Spotify Premium nodig."));
-    player.addListener("authentication_error", () => showError("playError", "De Spotify-sessie is verlopen. Koppel opnieuw."));
-    player.addListener("playback_error", () => showError("playError", "Dit nummer kon niet worden afgespeeld."));
+    player.addListener("account_error", () => showError("playError", t("premiumRequired")));
+    player.addListener("authentication_error", () => showError("playError", t("reconnect")));
+    player.addListener("playback_error", () => showError("playError", t("playbackFailed")));
     player.addListener("player_state_changed", (state) => {
       if (!state) return;
       isPlaying = !state.paused;
       $("togglePlayback").textContent = isPlaying ? "Ⅱ" : "▶";
-      $("togglePlayback").setAttribute("aria-label", isPlaying ? "Pauzeren" : "Afspelen");
+      $("togglePlayback").setAttribute("aria-label", isPlaying ? t("pauseAria") : t("playAria"));
       $("record").classList.toggle("paused", !isPlaying);
     });
     await player.connect();
@@ -189,7 +399,7 @@
     for (let attempt = 0; attempt < 30 && !deviceId; attempt += 1) {
       await new Promise((resolve) => setTimeout(resolve, 200));
     }
-    if (!deviceId) throw new Error("De Spotify-speler is nog niet klaar. Probeer opnieuw.");
+    if (!deviceId) throw new Error(t("playerNotReady"));
   }
 
   async function spotifyRequest(path, options = {}) {
@@ -204,7 +414,7 @@
         headers: { Authorization: `Bearer ${tokens.access_token}`, "Content-Type": "application/json", ...(options.headers || {}) }
       });
     }
-    if (!response.ok && response.status !== 204) throw new Error(`Spotify-fout ${response.status}`);
+    if (!response.ok && response.status !== 204) throw new Error(`${t("apiError")} ${response.status}`);
     return response;
   }
 
@@ -223,7 +433,7 @@
   }
 
   async function playTrack(trackId) {
-    currentTrack = tracksById.get(trackId) || { spotify_id: trackId, title: "Onbekend nummer", artist: "Spotify", year: "—" };
+    currentTrack = tracksById.get(trackId) || { spotify_id: trackId, title: t("unknownTrack"), artist: "Spotify", year: "—" };
     showView("playingView");
     showError("playError", "");
     try {
@@ -236,7 +446,7 @@
       $("record").classList.remove("paused");
       $("togglePlayback").textContent = "Ⅱ";
     } catch (error) {
-      showError("playError", "Het nummer startte niet. Tik op afspelen of controleer je Premium-account.");
+      showError("playError", t("trackStartFailed"));
     }
   }
 
@@ -251,7 +461,7 @@
     showView("scannerView");
     showError("scanError", "");
     if (!window.Html5Qrcode) {
-      showError("scanError", "De QR-scanner kon niet worden geladen. Controleer de internetverbinding.");
+      showError("scanError", t("scannerLoadFailed"));
       return;
     }
 
@@ -264,7 +474,7 @@
         async (decodedText) => {
           const trackId = trackIdFromQr(decodedText);
           if (!trackId) {
-            showError("scanError", "Dit is geen geldige Spotify-nummercode.");
+            showError("scanError", t("invalidQr"));
             return;
           }
           await stopScanner();
@@ -273,7 +483,7 @@
         () => {}
       );
     } catch {
-      showError("scanError", "Geef de browser toegang tot de camera en probeer opnieuw.");
+      showError("scanError", t("cameraPermission"));
     }
   }
 
@@ -292,8 +502,8 @@
   async function revealAnswer() {
     if (!currentTrack) return;
     $("answerYear").textContent = currentTrack.year || "—";
-    $("answerTitle").textContent = currentTrack.title || "Onbekend nummer";
-    $("answerArtist").textContent = currentTrack.artist || "Onbekende artiest";
+    $("answerTitle").textContent = currentTrack.title || t("unknownTrack");
+    $("answerArtist").textContent = currentTrack.artist || t("unknownArtist");
     showView("answerView");
   }
 
@@ -311,26 +521,30 @@
   }
 
   async function init() {
+    document.querySelectorAll("[data-language]").forEach((button) => {
+      button.addEventListener("click", () => applyLanguage(button.dataset.language));
+    });
+    applyLanguage(language);
     $("redirectUri").value = redirectUri;
     $("clientId").value = getClientId();
     $("copyRedirect").addEventListener("click", async () => {
       await navigator.clipboard.writeText(redirectUri);
-      $("copyRedirect").textContent = "Gekopieerd";
-      setTimeout(() => { $("copyRedirect").textContent = "Kopieer"; }, 1600);
+      $("copyRedirect").textContent = t("copied");
+      setTimeout(() => { $("copyRedirect").textContent = t("copy"); }, 1600);
     });
     $("connectButton").addEventListener("click", connectSpotify);
     $("startButton").addEventListener("click", async () => {
       $("startButton").disabled = true;
-      $("startButton").textContent = "Speler verbinden…";
+      $("startButton").textContent = t("connecting");
       try {
         await activatePlayer();
         await startScanner();
       } catch (error) {
         showView("readyView");
-        alert(error.message || "De Spotify-speler kon niet starten.");
+        alert(error.message || t("playerStartFailed"));
       } finally {
         $("startButton").disabled = false;
-        $("startButton").textContent = "Start het spel";
+        $("startButton").textContent = t("startGame");
       }
     });
     $("resetButton").addEventListener("click", resetConnection);
@@ -347,12 +561,12 @@
       const response = await fetch("./tracks.json");
       tracks = await response.json();
       tracksById = new Map(tracks.map((track) => [track.spotify_id, track]));
-      if (tracks.length !== 95) throw new Error("De nummerlijst is niet compleet.");
+      if (tracks.length !== 95) throw new Error(t("incompleteTracks"));
 
       const params = new URLSearchParams(location.search);
       if (params.get("error")) {
         history.replaceState({}, "", redirectUri);
-        throw new Error("Spotify-aanmelding geannuleerd.");
+        throw new Error(t("loginCancelled"));
       }
       if (params.get("code")) await exchangeCode(params.get("code"));
       else tokens = readTokens();
@@ -365,7 +579,7 @@
       showView("readyView");
     } catch (error) {
       showView("setupView");
-      showError("setupError", error.message || "De scanner kon niet worden voorbereid.");
+      showError("setupError", error.message || t("scannerPrepareFailed"));
     }
   }
 

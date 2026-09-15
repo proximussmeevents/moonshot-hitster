@@ -11,42 +11,49 @@
 <body>
   <div class="stars" aria-hidden="true"></div>
   <main class="app-shell">
-    <header class="brand">
-      <span class="brand-mark" aria-hidden="true">∞</span>
-      <div>
-        <strong>SME</strong>
-        <span>MOONSHOT 2026</span>
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">∞</span>
+        <div>
+          <strong>SME</strong>
+          <span>MOONSHOT 2026</span>
+        </div>
       </div>
+      <nav class="language-switcher" aria-label="Language / Taal / Langue">
+        <button type="button" data-language="nl" aria-pressed="true">NL</button>
+        <button type="button" data-language="fr" aria-pressed="false">FR</button>
+        <button type="button" data-language="en" aria-pressed="false">EN</button>
+      </nav>
     </header>
 
     <section id="loadingView" class="view centered" aria-live="polite">
       <div class="orb loading-orb" aria-hidden="true"></div>
-      <p>Missie wordt klaargezet…</p>
+      <p data-i18n="loading">Missie wordt klaargezet…</p>
     </section>
 
     <section id="setupView" class="view hidden" aria-labelledby="setupTitle">
-      <div class="eyebrow">Eenmalige voorbereiding</div>
-      <h1 id="setupTitle">Koppel Spotify</h1>
-      <p class="lead">Daarna spelen alle nummers binnen deze scanner. Je hoeft tijdens het spel niet meer naar Spotify te wisselen.</p>
+      <div class="eyebrow" data-i18n="setupEyebrow">Eenmalige voorbereiding</div>
+      <h1 id="setupTitle" data-i18n="setupTitle">Koppel Spotify</h1>
+      <p class="lead" data-i18n="setupLead">Daarna spelen alle nummers binnen deze scanner. Je hoeft tijdens het spel niet meer naar Spotify te wisselen.</p>
 
       <div class="panel setup-panel">
         <ol class="steps">
-          <li>Maak een app aan in het Spotify Developer Dashboard.</li>
-          <li>Voeg onderstaande terugkeerlink toe bij <em>Redirect URIs</em>.</li>
-          <li>Plak de Client ID en verbind je Premium-account.</li>
+          <li data-i18n="stepCreate">Maak een app aan in het Spotify Developer Dashboard.</li>
+          <li data-i18n="stepRedirect">Voeg onderstaande terugkeerlink toe bij Redirect URIs.</li>
+          <li data-i18n="stepClient">Plak de Client ID en verbind je Premium-account.</li>
         </ol>
 
-        <label class="field-label" for="redirectUri">Terugkeerlink</label>
+        <label class="field-label" for="redirectUri" data-i18n="redirectLabel">Terugkeerlink</label>
         <div class="copy-row">
           <input id="redirectUri" readonly>
-          <button id="copyRedirect" class="icon-button" type="button" aria-label="Kopieer terugkeerlink">Kopieer</button>
+          <button id="copyRedirect" class="icon-button" type="button" data-i18n="copy" data-i18n-aria="copyAria" aria-label="Kopieer terugkeerlink">Kopieer</button>
         </div>
 
         <label class="field-label" for="clientId">Spotify Client ID</label>
-        <input id="clientId" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Plak hier de Client ID">
+        <input id="clientId" autocomplete="off" autocapitalize="off" spellcheck="false" data-i18n-placeholder="clientPlaceholder" placeholder="Plak hier de Client ID">
 
-        <button id="connectButton" class="primary-button" type="button">Verbind met Spotify</button>
-        <a class="text-link" href="https://developer.spotify.com/dashboard" target="_blank" rel="noreferrer">Open Spotify Developer Dashboard</a>
+        <button id="connectButton" class="primary-button" type="button" data-i18n="connect">Verbind met Spotify</button>
+        <a class="text-link" href="https://developer.spotify.com/dashboard" target="_blank" rel="noreferrer" data-i18n="openDashboard">Open Spotify Developer Dashboard</a>
       </div>
       <p id="setupError" class="message error hidden" role="alert"></p>
     </section>
@@ -55,33 +62,33 @@
       <div class="mission-ring" aria-hidden="true">
         <div class="orb"></div>
       </div>
-      <div class="eyebrow">95 nummers klaar</div>
-      <h1 id="readyTitle">Klaar voor<br>de lancering?</h1>
-      <p class="lead narrow">Tik eenmaal op start. Daarna scan je alle kaarten vanuit dit scherm.</p>
-      <button id="startButton" class="primary-button jumbo" type="button">Start het spel</button>
-      <button id="resetButton" class="quiet-button" type="button">Spotify-koppeling wijzigen</button>
+      <div class="eyebrow" data-i18n="readyEyebrow">95 nummers klaar</div>
+      <h1 id="readyTitle" data-i18n="readyTitle">Klaar voor de lancering?</h1>
+      <p class="lead narrow" data-i18n="readyLead">Tik eenmaal op start. Daarna scan je alle kaarten vanuit dit scherm.</p>
+      <button id="startButton" class="primary-button jumbo" type="button" data-i18n="startGame">Start het spel</button>
+      <button id="resetButton" class="quiet-button" type="button" data-i18n="changeConnection">Spotify-koppeling wijzigen</button>
     </section>
 
     <section id="scannerView" class="view hidden" aria-labelledby="scannerTitle">
       <div class="topline">
         <div>
-          <div class="eyebrow">Volgende kaart</div>
-          <h1 id="scannerTitle">Scan de QR-code</h1>
+          <div class="eyebrow" data-i18n="nextCardEyebrow">Volgende kaart</div>
+          <h1 id="scannerTitle" data-i18n="scanTitle">Scan de QR-code</h1>
         </div>
-        <button id="closeScanner" class="round-button" type="button" aria-label="Scanner sluiten">×</button>
+        <button id="closeScanner" class="round-button" type="button" data-i18n-aria="closeScannerAria" aria-label="Scanner sluiten">×</button>
       </div>
 
       <div class="scanner-frame">
         <div id="qrReader"></div>
         <div class="scan-corners" aria-hidden="true"></div>
       </div>
-      <p class="scan-help">Houd de kaart stil binnen het kader.</p>
+      <p class="scan-help" data-i18n="scanHelp">Houd de kaart stil binnen het kader.</p>
       <p id="scanError" class="message error hidden" role="alert"></p>
     </section>
 
     <section id="playingView" class="view hidden centered" aria-labelledby="playingTitle">
-      <div class="eyebrow">Nummer speelt</div>
-      <h1 id="playingTitle">Luister.<br>Weet jij wanneer?</h1>
+      <div class="eyebrow" data-i18n="playingEyebrow">Nummer speelt</div>
+      <h1 id="playingTitle" data-i18n="playingTitle">Luister. Weet jij wanneer?</h1>
 
       <div class="record-wrap" aria-hidden="true">
         <div id="record" class="record spinning">
@@ -93,23 +100,23 @@
       </div>
 
       <div class="player-controls" aria-label="Afspeelbediening">
-        <button id="restartTrack" class="round-button large" type="button" aria-label="Nummer opnieuw starten">↶</button>
-        <button id="togglePlayback" class="play-button" type="button" aria-label="Pauzeren">Ⅱ</button>
+        <button id="restartTrack" class="round-button large" type="button" data-i18n-aria="restartAria" aria-label="Nummer opnieuw starten">↶</button>
+        <button id="togglePlayback" class="play-button" type="button" data-i18n-aria="pauseAria" aria-label="Pauzeren">Ⅱ</button>
         <div class="round-placeholder" aria-hidden="true"></div>
       </div>
 
-      <button id="revealButton" class="primary-button jumbo" type="button">Onthul het antwoord</button>
-      <button id="stopAndScan" class="quiet-button" type="button">Stop en scan een andere kaart</button>
+      <button id="revealButton" class="primary-button jumbo" type="button" data-i18n="reveal">Onthul het antwoord</button>
+      <button id="stopAndScan" class="quiet-button" type="button" data-i18n="stopAndScan">Stop en scan een andere kaart</button>
       <p id="playError" class="message error hidden" role="alert"></p>
     </section>
 
     <section id="answerView" class="view hidden centered" aria-labelledby="answerTitle">
-      <div class="eyebrow">Het antwoord</div>
+      <div class="eyebrow" data-i18n="answerEyebrow">Het antwoord</div>
       <div id="answerYear" class="answer-year">—</div>
       <h1 id="answerTitle" class="answer-title">—</h1>
       <p id="answerArtist" class="answer-artist">—</p>
-      <button id="nextCard" class="primary-button jumbo" type="button">Scan volgende kaart</button>
-      <button id="replayFromAnswer" class="quiet-button" type="button">Nummer opnieuw afspelen</button>
+      <button id="nextCard" class="primary-button jumbo" type="button" data-i18n="scanNext">Scan volgende kaart</button>
+      <button id="replayFromAnswer" class="quiet-button" type="button" data-i18n="replay">Nummer opnieuw afspelen</button>
     </section>
   </main>
 

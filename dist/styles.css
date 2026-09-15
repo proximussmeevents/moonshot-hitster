@@ -64,11 +64,18 @@ button, a { -webkit-tap-highlight-color: transparent; }
   flex-direction: column;
 }
 
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 28px;
   letter-spacing: .08em;
 }
 
@@ -86,6 +93,34 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .brand strong { display: block; font-size: 19px; line-height: 1; }
 .brand div span { display: block; margin-top: 4px; font-size: 10px; color: var(--muted); }
+
+.language-switcher {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 12px;
+  background: rgba(8,4,20,.55);
+}
+
+.language-switcher button {
+  min-width: 35px;
+  min-height: 34px;
+  padding: 0 7px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.language-switcher button[aria-pressed="true"] {
+  background: linear-gradient(135deg, var(--violet), #9d4deb);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(112,76,255,.35);
+}
 
 .view { flex: 1; animation: arrive .35s ease-out; }
 .view.centered { display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center; padding-bottom: 34px; }
