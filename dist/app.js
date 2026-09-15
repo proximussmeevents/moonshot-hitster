@@ -245,13 +245,25 @@
 
   function saveTokens(value) {
     tokens = value;
-    sessionStorage.setItem(tokenKey, JSON.stringify(value));
+    localStorage.setItem(tokenKey, JSON.stringify(value));
+    sessionStorage.removeItem(tokenKey);
   }
 
   function readTokens() {
     try {
-      return JSON.parse(sessionStorage.getItem(tokenKey) || "null");
+      const stored = localStorage.getItem(tokenKey);
+      if (stored) return JSON.parse(stored);
+
+      // Migrate sessions created by the earlier version of the scanner.
+      const previousSession = sessionStorage.getItem(tokenKey);
+      if (!previousSession) return null;
+      const migrated = JSON.parse(previousSession);
+      localStorage.setItem(tokenKey, previousSession);
+      sessionStorage.removeItem(tokenKey);
+      return migrated;
     } catch {
+      localStorage.removeItem(tokenKey);
+      sessionStorage.removeItem(tokenKey);
       return null;
     }
   }
@@ -514,6 +526,7 @@
     deviceId = null;
     tokens = null;
     currentTrack = null;
+    localStorage.removeItem(tokenKey);
     sessionStorage.removeItem(tokenKey);
     localStorage.removeItem(clientKey);
     $("clientId").value = "";
