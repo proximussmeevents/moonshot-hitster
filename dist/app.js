@@ -27,6 +27,9 @@
       copyAria: "Kopieer terugkeerlink",
       clientPlaceholder: "Plak hier de Client ID",
       connect: "Verbind met Spotify",
+      continueWithoutLinking: "Ga verder zonder koppeling",
+      continueWithoutLinkingNote: "Scan een kaart en open het nummer rechtstreeks in Spotify.",
+      or: "of",
       openDashboard: "Open Spotify Developer Dashboard",
       readyEyebrow: "95 nummers klaar",
       readyTitle: "Klaar voor de lancering?",
@@ -87,6 +90,9 @@
       copyAria: "Copier le lien de retour",
       clientPlaceholder: "Collez le Client ID ici",
       connect: "Se connecter à Spotify",
+      continueWithoutLinking: "Continuer sans connexion",
+      continueWithoutLinkingNote: "Scannez une carte et ouvrez le morceau directement dans Spotify.",
+      or: "ou",
       openDashboard: "Ouvrir Spotify Developer Dashboard",
       readyEyebrow: "95 morceaux prêts",
       readyTitle: "Prêt pour le lancement ?",
@@ -147,6 +153,9 @@
       copyAria: "Copy return link",
       clientPlaceholder: "Paste the Client ID here",
       connect: "Connect to Spotify",
+      continueWithoutLinking: "Continue without linking",
+      continueWithoutLinkingNote: "Scan a card and open the track directly in Spotify.",
+      or: "or",
       openDashboard: "Open Spotify Developer Dashboard",
       readyEyebrow: "95 tracks ready",
       readyTitle: "Ready for launch?",
@@ -201,6 +210,7 @@
   let scanner = null;
   let currentTrack = null;
   let isPlaying = true;
+  let openInSpotifyMode = false;
   let language = localStorage.getItem(languageKey) || "nl";
 
   function t(key) {
@@ -444,6 +454,12 @@
     return urlMatch?.[1] || uriMatch?.[1] || null;
   }
 
+  function openTrackInSpotify(trackId) {
+    openInSpotifyMode = false;
+    showView("setupView");
+    location.assign(`https://open.spotify.com/track/${encodeURIComponent(trackId)}`);
+  }
+
   async function playTrack(trackId) {
     currentTrack = tracksById.get(trackId) || { spotify_id: trackId, title: t("unknownTrack"), artist: "Spotify", year: "—" };
     showView("playingView");
@@ -490,7 +506,8 @@
             return;
           }
           await stopScanner();
-          await playTrack(trackId);
+          if (openInSpotifyMode) openTrackInSpotify(trackId);
+          else await playTrack(trackId);
         },
         () => {}
       );
@@ -546,6 +563,10 @@
       setTimeout(() => { $("copyRedirect").textContent = t("copy"); }, 1600);
     });
     $("connectButton").addEventListener("click", connectSpotify);
+    $("continueWithoutLinking").addEventListener("click", async () => {
+      openInSpotifyMode = true;
+      await startScanner();
+    });
     $("startButton").addEventListener("click", async () => {
       $("startButton").disabled = true;
       $("startButton").textContent = t("connecting");
@@ -561,7 +582,12 @@
       }
     });
     $("resetButton").addEventListener("click", resetConnection);
-    $("closeScanner").addEventListener("click", async () => { await stopScanner(); showView("readyView"); });
+    $("closeScanner").addEventListener("click", async () => {
+      const returnView = openInSpotifyMode ? "setupView" : "readyView";
+      openInSpotifyMode = false;
+      showView(returnView);
+      await stopScanner();
+    });
     $("togglePlayback").addEventListener("click", togglePlayback);
     $("restartTrack").addEventListener("click", restartTrack);
     $("revealButton").addEventListener("click", revealAnswer);
