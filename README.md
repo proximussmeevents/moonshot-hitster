@@ -1,6 +1,8 @@
 # Moonshot Hitster
 
-Mobiele scanner voor de 95 muziekkaarten van SME Moonshot 2026. De site scant de QR-code van een Spotify-track, speelt het nummer af via Spotify Premium en onthult daarna titel, artiest en jaar.
+Mobiele scanner voor de actuele muziekkaarten van SME Moonshot 2026. De site scant de QR-code van een Spotify-track, speelt het nummer af via Spotify Premium en onthult daarna titel, artiest en jaar.
+
+De huidige set is gebaseerd op de 53 nummers in de Spotify-playlist `4NMdgZIwG41bxhcUj5oiKN`. De printklare kaarten, brondata en synchronisatiescripts staan in `print/` en `tools/`.
 
 ## Gebruik
 
@@ -18,3 +20,12 @@ De Client ID en Spotify-sessie worden alleen lokaal in de browser bewaard. Er st
 ## Publicatie
 
 Elke push naar `main` publiceert de inhoud van `dist/` automatisch via GitHub Pages.
+
+## Playlist en kaartjes bijwerken
+
+```bash
+python3 tools/sync_playlist.py
+python3 tools/build_cards.py
+```
+
+`sync_playlist.py` leest de openbare Spotify-playlist, bewaart directe tracklinks en corrigeert bekende heruitgavejaren voor Hitster. `build_cards.py` maakt een dubbelzijdige A4-PDF met 63 × 88 mm kaarten en gespiegeld gelegde achterkanten voor dubbelzijdig printen langs de lange zijde.

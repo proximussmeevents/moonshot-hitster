@@ -31,7 +31,7 @@
       continueWithoutLinkingNote: "Scan een kaart en open het nummer rechtstreeks in Spotify.",
       or: "of",
       openDashboard: "Open Spotify Developer Dashboard",
-      readyEyebrow: "95 nummers klaar",
+      readyEyebrow: "{count} nummers klaar",
       readyTitle: "Klaar voor de lancering?",
       readyLead: "Tik eenmaal op start. Daarna scan je alle kaarten vanuit dit scherm.",
       startGame: "Start het spel",
@@ -94,7 +94,7 @@
       continueWithoutLinkingNote: "Scannez une carte et ouvrez le morceau directement dans Spotify.",
       or: "ou",
       openDashboard: "Ouvrir Spotify Developer Dashboard",
-      readyEyebrow: "95 morceaux prêts",
+      readyEyebrow: "{count} morceaux prêts",
       readyTitle: "Prêt pour le lancement ?",
       readyLead: "Appuyez une fois sur démarrer. Scannez ensuite toutes les cartes depuis cet écran.",
       startGame: "Démarrer le jeu",
@@ -157,7 +157,7 @@
       continueWithoutLinkingNote: "Scan a card and open the track directly in Spotify.",
       or: "or",
       openDashboard: "Open Spotify Developer Dashboard",
-      readyEyebrow: "95 tracks ready",
+      readyEyebrow: "{count} tracks ready",
       readyTitle: "Ready for launch?",
       readyLead: "Tap start once. You can then scan every card from this screen.",
       startGame: "Start the game",
@@ -214,7 +214,8 @@
   let language = localStorage.getItem(languageKey) || "nl";
 
   function t(key) {
-    return translations[language]?.[key] || translations.nl[key] || key;
+    const value = translations[language]?.[key] || translations.nl[key] || key;
+    return value.replace("{count}", tracks.length ? String(tracks.length) : "…");
   }
 
   function applyLanguage(nextLanguage) {
@@ -600,7 +601,12 @@
       const response = await fetch("./tracks.json");
       tracks = await response.json();
       tracksById = new Map(tracks.map((track) => [track.spotify_id, track]));
-      if (tracks.length !== 95) throw new Error(t("incompleteTracks"));
+      const ids = tracks.map((track) => track.spotify_id);
+      const numbers = tracks.map((track) => track.nr);
+      if (!tracks.length || new Set(ids).size !== tracks.length || numbers.some((number, index) => number !== index + 1)) {
+        throw new Error(t("incompleteTracks"));
+      }
+      applyLanguage(language);
 
       const params = new URLSearchParams(location.search);
       if (params.get("error")) {
