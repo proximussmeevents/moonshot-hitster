@@ -174,7 +174,7 @@ def draw_page_one(c: canvas.Canvas) -> None:
         ("3", "Leg de kaart op de juiste plaats in jullie tijdslijn."),
         ("4", "Onthul het antwoord. Juist geplaatst? Noteer de kaart op het scoreblad."),
     ]
-    y = 542
+    y = 544
     for number, text in rules:
         c.setFillColor(PURPLE)
         c.circle(48, y + 2, 10, fill=1, stroke=0)
@@ -182,7 +182,7 @@ def draw_page_one(c: canvas.Canvas) -> None:
         c.setFont("Moonshot-Bold", 8)
         c.drawCentredString(48, y - 1, number)
         draw_wrapped(c, text, 66, y, 480, size=9.2, leading=11, color=white)
-        y -= 29
+        y -= 25
 
     round_rect(c, 36, 332, 252, 116, 14, HexColor("#1E1040"), HexColor("#805ABF"), 0.93)
     c.setFillColor(CYAN)
