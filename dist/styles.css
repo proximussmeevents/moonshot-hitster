@@ -222,6 +222,11 @@ input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(169,112,25
 .primary-button.jumbo { min-height: 62px; font-size: 1.05rem; }
 .setup-panel .primary-button { margin-top: 22px; }
 
+.resource-link {
+  margin-top: 13px;
+  color: var(--cyan);
+}
+
 .secondary-button {
   width: 100%;
   min-height: 54px;
