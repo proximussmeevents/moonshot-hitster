@@ -20,7 +20,6 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "output" / "pdf" / "Moonshot_Hitster_spelregels_en_scoreblad.pdf"
 BACKGROUND = ROOT / "print" / "assets" / "moonshot_card_background.png"
 
-SITE_URL = "https://moonshot-hitster.matthias-versc989465.chatgpt.site/"
 GITHUB_URL = "https://proximussmeevents.github.io/moonshot-hitster/"
 SPOTIFY_URL = "https://open.spotify.com/playlist/4NMdgZIwG41bxhcUj5oiKN"
 
@@ -227,30 +226,29 @@ def draw_page_one(c: canvas.Canvas) -> None:
     c.drawRightString(558, 313, "De QR-codes en URL's zijn aanklikbaar in de digitale PDF.")
 
     links = [
-        ("APP", SITE_URL, "Scan en onthul"),
-        ("GITHUB", GITHUB_URL, "Back-up van de app"),
+        ("PRODUCTIE-APP", GITHUB_URL, "Scan, speel en onthul"),
         ("SPOTIFY", SPOTIFY_URL, "Volledige playlist"),
     ]
-    card_w = 163
+    card_w = 253
     for idx, (label, url, subtitle) in enumerate(links):
-        x = 36 + idx * 180
+        x = 36 + idx * 270
         round_rect(c, x, 65, card_w, 228, 14, HexColor("#160C31"), HexColor("#7149A7"), 0.94)
-        c.setFillColor(CYAN if idx < 2 else HexColor("#69E48D"))
+        c.setFillColor(CYAN if idx == 0 else HexColor("#69E48D"))
         c.setFont("Moonshot-Bold", 9)
         c.drawString(x + 13, 273, label)
         c.setFillColor(white)
         c.setFont("Moonshot-Bold", 8.5)
         c.drawString(x + 13, 256, subtitle)
-        draw_qr(c, url, x + 33, 139, 98)
+        draw_qr(c, url, x + 67.5, 130, 118)
         display = url.replace("https://", "")
         if len(display) > 25:
             display = display[:24] + "…"
         c.setFillColor(HexColor("#D6C9E8"))
         c.setFont("Moonshot", 6.7)
-        c.drawCentredString(x + card_w / 2, 116, display)
+        c.drawCentredString(x + card_w / 2, 103, display)
         c.setFillColor(PINK)
         c.setFont("Moonshot-Bold", 7.2)
-        c.drawCentredString(x + card_w / 2, 87, "OPEN LINK")
+        c.drawCentredString(x + card_w / 2, 80, "OPEN LINK")
         c.linkURL(url, (x, 65, x + card_w, 293), relative=0, thickness=0)
 
     c.setFillColor(HexColor("#B8AACB"))
